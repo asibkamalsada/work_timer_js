@@ -1,15 +1,30 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <style>
-            #fileInput{opacity:0}  
-            body{
-                background:cadetblue;
-            }
-        </style>
-    </head>
-    <body>
-        <label for="fileInput"><img src="File_upload_Img">
-        <label><input type="file" id="fileInput"></label>
-    </body>
+<head>
+    <style>
+        #fileInput {
+            opacity: 0
+        }
+
+        body {
+            background: cadetblue;
+        }
+    </style>
+</head>
+<body>
+<script lang="javascript" src="sheet.js"></script>
+<label><input type="file" id="fileInput" onchange="function handleFile() {
+  let file = e.target.files[0];
+  let reader = new FileReader();
+  reader.onload = function(e) {
+    let data = e.target.result;
+    /* reader.readAsArrayBuffer(file) -> data will be an ArrayBuffer */
+    let workbook = XLSX.read(e.target.result);
+
+    /* DO SOMETHING WITH workbook HERE */
+  };
+  reader.readAsArrayBuffer(file);
+}
+        handleFile()"></label>
+</body>
 </html>
