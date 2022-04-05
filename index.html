@@ -13,18 +13,27 @@
 </head>
 <body>
 <script lang="javascript" src="sheet.js"></script>
-<label><input type="file" id="fileInput" onchange="function handleFile() {
-  let file = e.target.files[0];
-  let reader = new FileReader();
-  reader.onload = function(e) {
-    let data = e.target.result;
-    /* reader.readAsArrayBuffer(file) -> data will be an ArrayBuffer */
-    let workbook = XLSX.read(e.target.result);
+<label><input type="file" id="fileInput">Upload</label>
 
-    /* DO SOMETHING WITH workbook HERE */
-  };
-  reader.readAsArrayBuffer(file);
-}
-        handleFile()"></label>
+<script>
+    function handleFile(evt) {
+        let file = evt.target.files[0];
+        let reader = new FileReader();
+        reader.onload = function (e) {
+            let data = e.target.result;
+            /* reader.readAsArrayBuffer(file) -> data will be an ArrayBuffer */
+            let workbook = XLSX.read(e.target.result);
+
+            console.log(workbook)
+            let ws = workbook.Sheets["Tabelle1"]
+
+            console.log(ws)
+
+            /* DO SOMETHING WITH workbook HERE */
+        };
+        reader.readAsArrayBuffer(file);
+    }
+    document.getElementById("fileInput").onchange = handleFile;
+</script>
 </body>
 </html>
